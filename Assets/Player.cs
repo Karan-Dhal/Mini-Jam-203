@@ -1,0 +1,74 @@
+using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class Player : MonoBehaviour
+{
+    [SerializeField] InputActionAsset action;
+
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float jump = 2f;
+    [SerializeField] private float gravity = -9.8f;
+
+    private InputAction moveInputAction;
+    private InputAction jumpInputAction;
+
+
+    private CharacterController controller;
+    private Vector2 moveInput;
+    public float velocity;
+    private bool Jumped = false;
+    
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        controller = GetComponent<CharacterController>();
+        action.FindActionMap("Player").Enable();
+
+        moveInputAction = InputSystem.actions.FindAction("Move");
+        jumpInputAction = InputSystem.actions.FindAction("Jump");
+        jumpInputAction.performed += Jump;
+    }
+
+    
+
+    private void Jump(InputAction.CallbackContext context)
+    {
+        if (controller.isGrounded)
+        {
+            velocity += jump;
+            print("JUMPED");
+            Jumped = true;
+        }
+    }
+
+
+    void FixedUpdate()
+    {
+        moveInput = moveInputAction.ReadValue<Vector2>();
+
+        Vector3 moveDir = (Camera.main.transform.forward.normalized * moveInput.y) + (Camera.main.transform.right.normalized * moveInput.x);
+        moveDir.y = 0;
+        moveDir = moveDir.normalized * speed;
+
+        if (moveDir != Vector3.zero) transform.rotation = Quaternion.LookRotation(moveDir);
+        
+        
+
+        if (!Jumped && controller.isGrounded)
+        {
+            velocity = -1.0f;
+        }
+        else
+        {
+            velocity += gravity;
+            Jumped = false;
+        }
+
+        moveDir.y = velocity;
+
+        controller.Move(moveDir * Time.deltaTime);
+    }
+    
+}
