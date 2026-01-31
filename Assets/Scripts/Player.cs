@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public float velocity;
     private bool Jumped = false;
     private bool DJumped = false;
+    public Vector3 movingPlatform = Vector3.zero;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -79,8 +80,11 @@ public class Player : MonoBehaviour
         }
 
         moveDir.y = velocity;
+        moveDir += movingPlatform;
 
         controller.Move(moveDir * Time.deltaTime);
+
+        movingPlatform = Vector3.zero;
     }
 
 
