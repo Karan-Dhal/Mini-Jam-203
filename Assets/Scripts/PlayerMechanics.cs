@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,6 +28,8 @@ public class PlayerMechanics : MonoBehaviour
     private InputAction ChannelFInputAction;
     private InputAction ChannelBInputAction;
 
+    private bool canChangeChannel = false;
+
     private Player player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -51,6 +54,7 @@ public class PlayerMechanics : MonoBehaviour
 
     private void ChangeChannelF(InputAction.CallbackContext context)
     {
+        if (!canChangeChannel) return;
         currentChannel++;
         if (currentChannel == 4) currentChannel = 1;
         foreach (Channel chan in FindObjectsByType<Channel>(FindObjectsSortMode.None)) chan.ChannelChanged(currentChannel);
@@ -59,6 +63,7 @@ public class PlayerMechanics : MonoBehaviour
 
     private void ChangeChannelB(InputAction.CallbackContext context)
     {
+        if (!canChangeChannel) return;
         currentChannel--;
         if (currentChannel == 0) currentChannel = 3;
         foreach (Channel chan in FindObjectsByType<Channel>(FindObjectsSortMode.None)) chan.ChannelChanged(currentChannel);
@@ -90,6 +95,12 @@ public class PlayerMechanics : MonoBehaviour
     {
         if (Time.timeScale == slowMoSpeed) { TimeManager.Instance.setWorldSpeed(2.0f); slowM.gameObject.SetActive(false); }
         else { TimeManager.Instance.setWorldSpeed(slowMoSpeed); slowM.gameObject.SetActive(true); }
+    }
+
+    public void CanChangeChannel(bool _true)
+    {
+        channel.gameObject.SetActive(_true);
+        canChangeChannel = _true;
     }
 
 }
