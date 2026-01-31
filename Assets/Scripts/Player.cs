@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float jump = 2f;
     [SerializeField] private float gravity = -9.8f;
 
+    public float speedmult = 1f;
+
     private InputAction moveInputAction;
     private InputAction jumpInputAction;
 
@@ -50,7 +52,7 @@ public class Player : MonoBehaviour
 
         Vector3 moveDir = (Camera.main.transform.forward.normalized * moveInput.y) + (Camera.main.transform.right.normalized * moveInput.x);
         moveDir.y = 0;
-        moveDir = moveDir.normalized * speed;
+        moveDir = moveDir.normalized * speed * speedmult;
 
         if (moveDir != Vector3.zero) transform.rotation = Quaternion.LookRotation(moveDir);
         
@@ -58,7 +60,7 @@ public class Player : MonoBehaviour
 
         if (!Jumped && controller.isGrounded)
         {
-            velocity = -1.0f;
+            velocity = gravity;
         }
         else
         {
@@ -70,5 +72,6 @@ public class Player : MonoBehaviour
 
         controller.Move(moveDir * Time.deltaTime);
     }
-    
+
+
 }

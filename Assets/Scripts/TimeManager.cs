@@ -10,8 +10,9 @@ public class TimeManager : MonoBehaviour
 
     void Awake()
     {
+        Time.timeScale = 2f;
 
-        
+
 
         if (Instance != null && Instance != this)
         {

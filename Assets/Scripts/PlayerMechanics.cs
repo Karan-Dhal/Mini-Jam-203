@@ -9,25 +9,35 @@ public class PlayerMechanics : MonoBehaviour
 
     [SerializeField] InputActionAsset action;
     [SerializeField] private float fastForwardSpeed = 2.0f;
+    [SerializeField] private float slowMoSpeed = 1f;
     [SerializeField] private float pauseTime = 5.0f;
 
-    [SerializeField] private GameObject faseF;
+    [SerializeField] private GameObject fastF;
+    [SerializeField] private GameObject slowM;
     [SerializeField] private GameObject pause;
     [SerializeField] private TMP_Text channel;
 
     private int currentChannel = 1;
 
     private InputAction FastForwardInputAction;
+    private InputAction SlowMoInputAction;
 
     private InputAction PauseMechanicInputAction;
 
     private InputAction ChannelFInputAction;
     private InputAction ChannelBInputAction;
+
+    private Player player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        player = GetComponent<Player>();
+
         FastForwardInputAction = InputSystem.actions.FindAction("FastForward");
         FastForwardInputAction.performed += FastForward;
+
+        SlowMoInputAction = InputSystem.actions.FindAction("SlowMo");
+        SlowMoInputAction.performed += SlowMo;
 
         PauseMechanicInputAction = InputSystem.actions.FindAction("PauseMechanic");
         PauseMechanicInputAction.performed += Pause;
@@ -37,6 +47,7 @@ public class PlayerMechanics : MonoBehaviour
         ChannelFInputAction.performed += ChangeChannelF;
         ChannelBInputAction.performed += ChangeChannelB;
     }
+
 
     private void ChangeChannelF(InputAction.CallbackContext context)
     {
@@ -72,8 +83,13 @@ public class PlayerMechanics : MonoBehaviour
 
     private void FastForward(InputAction.CallbackContext context)
     {
-        if (Time.timeScale == fastForwardSpeed) { TimeManager.Instance.setWorldSpeed(1.0f); faseF.gameObject.SetActive(false); }
-        else { TimeManager.Instance.setWorldSpeed(fastForwardSpeed); faseF.gameObject.SetActive(true); }
+        if (player.speedmult == fastForwardSpeed) { player.speedmult = 1.0f; fastF.gameObject.SetActive(false); }
+        else { player.speedmult =  fastForwardSpeed; fastF.gameObject.SetActive(true); }
+    }
+    private void SlowMo(InputAction.CallbackContext context)
+    {
+        if (Time.timeScale == slowMoSpeed) { TimeManager.Instance.setWorldSpeed(2.0f); slowM.gameObject.SetActive(false); }
+        else { TimeManager.Instance.setWorldSpeed(slowMoSpeed); slowM.gameObject.SetActive(true); }
     }
 
 }
