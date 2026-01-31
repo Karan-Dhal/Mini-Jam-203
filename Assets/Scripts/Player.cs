@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jump = 2f;
     [SerializeField] private float gravity = -9.8f;
+    private float cyoteTime = 0.25f;
 
     public float speedmult = 1f;
 
@@ -20,7 +21,9 @@ public class Player : MonoBehaviour
     private Vector2 moveInput;
     public float velocity;
     private bool Jumped = false;
-    
+    private bool DJumped = false;
+    public Vector3 movingPlatform = Vector3.zero;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,11 +40,16 @@ public class Player : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext context)
     {
-        if (controller.isGrounded)
+        if (controller.isGrounded || cyoteTime > 0)
         {
-            velocity += jump;
+            velocity = jump;
             print("JUMPED");
             Jumped = true;
+        }
+        else if (DJumped)
+        {
+            velocity = jump / 1.25f;
+            DJumped = false;
         }
     }
 
@@ -60,17 +68,23 @@ public class Player : MonoBehaviour
 
         if (!Jumped && controller.isGrounded)
         {
+            cyoteTime = 0.25f;
             velocity = gravity;
+            DJumped = true;
         }
         else
         {
+            cyoteTime -= Time.deltaTime;
             velocity += gravity;
             Jumped = false;
         }
 
         moveDir.y = velocity;
+        moveDir += movingPlatform;
 
         controller.Move(moveDir * Time.deltaTime);
+
+        movingPlatform = Vector3.zero;
     }
 
 
