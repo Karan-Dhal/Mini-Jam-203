@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 3985000341112747064}
   - component: {fileID: 3369096655501392704}
   - component: {fileID: 1012792397307078812}
+  - component: {fileID: 2083495628854700607}
   m_Layer: 0
   m_Name: pCube1
   m_TagString: Untagged
@@ -286,6 +287,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2083495628854700607
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2719414140985058864}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4068373912626513877, guid: fd5718c5c0cb99741bc152e6e8085d03, type: 3}
 --- !u!1 &3281040243801057044
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,6 +477,7 @@ GameObject:
   - component: {fileID: 2335692616449486870}
   - component: {fileID: 4667504343540780351}
   - component: {fileID: 6930232022243509405}
+  - component: {fileID: 528651408562025198}
   m_Layer: 0
   m_Name: pCube2
   m_TagString: Untagged
@@ -534,6 +558,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &528651408562025198
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7326461708830106133}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5302568919011541938, guid: fd5718c5c0cb99741bc152e6e8085d03, type: 3}
 --- !u!1 &7724109430677374188
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,7 +633,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
