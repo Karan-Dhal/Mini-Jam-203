@@ -79,8 +79,8 @@ public class GateAndButtonManager : MonoBehaviour
         if (specificButton != null)
         {
             if (specificButton.isPressed) return;
-
-            if (specificButton.interactMode == ButtonMode.Switch && specificButton.isPressed) return;
+            
+            AudioManager.Instance.PlayLever();
 
             specificButton.isPressed = true;
             MoveItem(specificButton.mover, specificButton.targetPosition, buttonDuration);

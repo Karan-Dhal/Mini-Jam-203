@@ -7,6 +7,7 @@ public class Collectible : MonoBehaviour
     {
         if(collision.TryGetComponent(out Collecter collecter))
         {
+            AudioManager.Instance.PlayCollectible();
             collecter.AddScore(1);
             Destroy(gameObject);
         }

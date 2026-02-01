@@ -37,6 +37,8 @@ public class CrushingWallsManager : MonoBehaviour
     {
         if (!isCrushed)
         {
+            AudioManager.Instance.PlayCrushingWalls();
+
             iscrushing = true;
             yield return MoveWalls(amountToCrush, -amountToCrush, true);
             iscrushing = false;
@@ -45,8 +47,10 @@ public class CrushingWallsManager : MonoBehaviour
         }
         else
         {
-            yield return MoveWalls(-amountToCrush, amountToCrush, false);
+            AudioManager.Instance.PlayCrushingWalls();
             
+            yield return MoveWalls(-amountToCrush, amountToCrush, false);
+
             isCrushed = false;
         }
     }

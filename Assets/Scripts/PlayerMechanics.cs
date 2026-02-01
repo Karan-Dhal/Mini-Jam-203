@@ -72,6 +72,7 @@ public class PlayerMechanics : MonoBehaviour
 
     private void Pause(InputAction.CallbackContext context)
     {
+        AudioManager.Instance.PlayPause();
         
         foreach (PauseMechanic obj in FindObjectsByType<PauseMechanic>(FindObjectsSortMode.None))
         {
@@ -84,15 +85,21 @@ public class PlayerMechanics : MonoBehaviour
         pause.gameObject.SetActive(true);
         yield return new WaitForSeconds(_time);
         pause.gameObject.SetActive(false);
+        
+        AudioManager.Instance.PlayUnpause();
     }
 
     private void FastForward(InputAction.CallbackContext context)
     {
+        AudioManager.Instance.PlayFast();
+
         if (player.speedmult == fastForwardSpeed) { player.speedmult = 1.0f; fastF.gameObject.SetActive(false); }
         else { player.speedmult =  fastForwardSpeed; fastF.gameObject.SetActive(true); }
     }
     private void SlowMo(InputAction.CallbackContext context)
     {
+        AudioManager.Instance.PlaySlowmo();
+
         if (Time.timeScale == slowMoSpeed) { TimeManager.Instance.setWorldSpeed(2.0f); slowM.gameObject.SetActive(false); }
         else { TimeManager.Instance.setWorldSpeed(slowMoSpeed); slowM.gameObject.SetActive(true); }
     }

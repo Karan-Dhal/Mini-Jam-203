@@ -34,10 +34,10 @@ public class Player : MonoBehaviour
     private bool dead = false;
     private float deadTime = 5;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        AudioManager.Instance.PlayGameplayMusic();
+
         _health = health;
         controller = GetComponent<CharacterController>();
         action.FindActionMap("Player").Enable();
@@ -47,17 +47,16 @@ public class Player : MonoBehaviour
         jumpInputAction.performed += Jump;
     }
 
-
-
     private void Jump(InputAction.CallbackContext context)
     {
         if (controller.isGrounded || cyoteTime > 0)
         {
             velocity = jump;
-            print("JUMPED");
             Jumped = true;
 
             airVelocity = controller.velocity;
+
+            AudioManager.Instance.PlayJump();
         }
         else if (DJumped)
         {
@@ -66,11 +65,20 @@ public class Player : MonoBehaviour
         }
     }
 
-
     void FixedUpdate()
     {
-        if (dead) return;
+        if (dead)
+        {
+            AudioManager.Instance.StopFootsteps();
+            return;
+        }
+
         moveInput = moveInputAction.ReadValue<Vector2>();
+
+        if (controller.isGrounded && moveInput.sqrMagnitude > 0.01f)
+            AudioManager.Instance.StartFootsteps();
+        else
+            AudioManager.Instance.StopFootsteps();
 
         Vector3 moveDir = (Camera.main.transform.forward.normalized * moveInput.y) + (Camera.main.transform.right.normalized * moveInput.x);
         moveDir.y = 0;
