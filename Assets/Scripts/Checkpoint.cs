@@ -18,7 +18,6 @@ public class Checkpoint : MonoBehaviour
 
     public void ReturnToCheckpoint()
     {
-        Debug.LogError("Ded");
         gameObject.transform.position = checkpointPos;
         
     }

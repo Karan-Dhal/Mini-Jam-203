@@ -164,8 +164,8 @@ MonoBehaviour:
   gravity: -0.25
   health: 3
   hurtTime: 5
-  airControl: 1
-  airDempen: 1
+  airControl: 0.02
+  airDempen: 0.99
   speedmult: 1
   velocity: 0
   movingPlatform: {x: 0, y: 0, z: 0}
