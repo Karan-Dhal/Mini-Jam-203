@@ -15,13 +15,15 @@ public class DamageBox : MonoBehaviour
         if (other.gameObject == player.gameObject)
         {
             inHurtbox = true;
+            Debug.LogWarning("In hurtBox");
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject == player.gameObject)
         {
-            inHurtbox = true;
+            inHurtbox = false;
+            Debug.LogWarning("Out hurtBox");
         }
     }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 397131492883987979}
   - component: {fileID: 6404242176496030361}
   - component: {fileID: 263875486453122819}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SphereOutOfRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 3019312108369254808}
   - component: {fileID: 5036241395174650714}
   - component: {fileID: 4430252852666206993}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ConeDetect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 2348661148028981676}
   - component: {fileID: 8318936708325354273}
   - component: {fileID: 3476252277807549597}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BaseEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 31338741956285091}
   - component: {fileID: 8045493343985476762}
   - component: {fileID: 3576121574058124546}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SphereDetect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
