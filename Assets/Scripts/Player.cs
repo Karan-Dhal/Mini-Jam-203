@@ -36,6 +36,9 @@ public class Player : MonoBehaviour
 
     private AnimationManager animManager;
 
+    [Header("Higher values = faster snapping")]
+    [SerializeField] private float rotationSpeed = 10f;
+
     void Start()
     {
         animManager = GetComponentInChildren<AnimationManager>();
@@ -89,9 +92,12 @@ public class Player : MonoBehaviour
         moveDir.y = 0;
         moveDir = moveDir.normalized * speed * speedmult;
 
-        if (moveDir != Vector3.zero) transform.rotation = Quaternion.LookRotation(moveDir);
-
-
+        if (moveDir != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+            
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
 
         if (!Jumped && controller.isGrounded)
         {
