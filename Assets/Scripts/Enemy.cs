@@ -25,6 +25,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _chaseSpeed = 5;
     [SerializeField] private float _wanderSpeed = 1;
 
+    private void FixedUpdate()
+    {
+        print(_navMeshAgent.destination);
+        //print((_attackRangeMin + (_attackRangeMax - _attackRangeMin) / 2));
+    }
     private void Awake()
     {
         this.player = GameObject.FindWithTag("Player").transform;
@@ -100,20 +105,48 @@ public class Enemy : MonoBehaviour
                 if (Vector3.Distance(player.transform.position, gameObject.transform.position) < _attackRangeMin && _navMeshAgent.isOnNavMesh)
                 {
                     print("Running");
-                    _navMeshAgent.SetDestination(gameObject.transform.position - (player.transform.position - gameObject.transform.position).normalized * Random.Range(_attackRangeMin + 0.5f,_attackRangeMax - 0.5f));
+                    _navMeshAgent.SetDestination(player.transform.position + (gameObject.transform.position - player.transform.position).normalized * (_attackRangeMin + (_attackRangeMax - _attackRangeMin) / 2));
                 }
                 else if (_navMeshAgent.isOnNavMesh)
                 {
-                    _navMeshAgent.ResetPath();
+                    ChangeState(Attack());
                 }
             }
             else if (_characterMovement != null)
             {
                 if (_navMeshAgent.isOnNavMesh)
                 {
-                    _navMeshAgent.SetDestination(player.transform.position);
+                    _navMeshAgent.SetDestination(player.transform.position + (gameObject.transform.position - player.transform.position).normalized * (_attackRangeMin + (_attackRangeMax - _attackRangeMin) / 2));
                 }
             }
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator Attack()
+    {
+        while (true)
+        {
+            var lookPos = (player.transform.position - gameObject.transform.position);
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
+            if (Vector3.Distance(player.transform.position, gameObject.transform.position) < _attackRangeMax && _characterMovement != null)
+            {
+
+                if (Vector3.Distance(player.transform.position, gameObject.transform.position) < _attackRangeMin && _navMeshAgent.isOnNavMesh)
+                {
+                    ChangeState(Chase());
+                }
+                else 
+                {
+                    
+                    print("Attack");
+                    //Attack
+                }
+            }
+            else ChangeState(Chase());
 
             yield return null;
         }
