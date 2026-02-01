@@ -4,6 +4,7 @@ using TMPro;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerMechanics : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PlayerMechanics : MonoBehaviour
     [SerializeField] private float fastForwardSpeed = 2.0f;
     [SerializeField] private float slowMoSpeed = 1f;
     [SerializeField] private float pauseTime = 5.0f;
+    [SerializeField] private float fastFTime = 5.0f;
+    [SerializeField] private float slowMoTime = 5.0f;
 
     [SerializeField] private GameObject fastF;
     [SerializeField] private GameObject slowM;
@@ -31,9 +34,18 @@ public class PlayerMechanics : MonoBehaviour
     private bool canChangeChannel = false;
 
     private Player player;
+
+    private bool canFastForward = false;
+    private bool canSlowMo = false;
+    private bool canPause = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        fastF.SetActive(false);
+        slowM.SetActive(false);
+        pause.SetActive(false);
+
         player = GetComponent<Player>();
 
         FastForwardInputAction = InputSystem.actions.FindAction("FastForward");
@@ -72,36 +84,65 @@ public class PlayerMechanics : MonoBehaviour
 
     private void Pause(InputAction.CallbackContext context)
     {
+        if (!canPause) return;
+        canPause = false;
         AudioManager.Instance.PlayPause();
         
         foreach (PauseMechanic obj in FindObjectsByType<PauseMechanic>(FindObjectsSortMode.None))
         {
             StartCoroutine(obj.Pause(pauseTime));
-            StartCoroutine(Wait(pauseTime));
         }
+        StartCoroutine(Wait(pauseTime));
     }
     public IEnumerator Wait(float _time)
     {
-        pause.gameObject.SetActive(true);
-        yield return new WaitForSeconds(_time);
-        pause.gameObject.SetActive(false);
+        float _pauseTime = _time;
+        Image image = pause.gameObject.GetComponent<Image>();
+        while (true)
+        {
+            if (_pauseTime <= 0) 
+            {
+                _pauseTime = 0;
+                image.fillAmount = _pauseTime;
+                break;
+            }
+            yield return null;
+            _pauseTime -= Time.deltaTime;
+            image.fillAmount = _pauseTime/pauseTime;
+        }
         
         AudioManager.Instance.PlayUnpause();
+
+        while (true)
+        {
+            if (_pauseTime >= pauseTime)
+            {
+                _pauseTime = pauseTime;
+                image.fillAmount = _pauseTime;
+                break;
+            }
+            yield return null;
+            _pauseTime += Time.deltaTime;
+            image.fillAmount = _pauseTime / pauseTime;
+        }
+        canPause = true;
     }
 
     private void FastForward(InputAction.CallbackContext context)
     {
+        if (!canFastForward) return;
+        canFastForward = false;
         AudioManager.Instance.PlayFast();
-
-        if (player.speedmult == fastForwardSpeed) { player.speedmult = 1.0f; fastF.gameObject.SetActive(false); }
-        else { player.speedmult =  fastForwardSpeed; fastF.gameObject.SetActive(true); }
+        player.speedmult = fastForwardSpeed;
+        StartCoroutine(FastF());
     }
     private void SlowMo(InputAction.CallbackContext context)
     {
+        if (!canSlowMo) return;
+        canSlowMo = false;
         AudioManager.Instance.PlaySlowmo();
-
-        if (Time.timeScale == slowMoSpeed) { TimeManager.Instance.setWorldSpeed(2.0f); slowM.gameObject.SetActive(false); }
-        else { TimeManager.Instance.setWorldSpeed(slowMoSpeed); slowM.gameObject.SetActive(true); }
+        TimeManager.Instance.setWorldSpeed(slowMoSpeed);
+        StartCoroutine(SlowMo());
     }
 
     public void CanChangeChannel(bool _true)
@@ -109,5 +150,92 @@ public class PlayerMechanics : MonoBehaviour
         channel.gameObject.SetActive(_true);
         canChangeChannel = _true;
     }
+
+    public void CanSlowMo(bool _true)
+    {
+        slowM.SetActive(_true);
+        canSlowMo = _true;
+    }
+    public void CanFastF(bool _true)
+    {
+        fastF.SetActive(_true);
+        canFastForward = _true;
+    }
+    public void CanPause(bool _true)
+    {
+        pause.SetActive(_true);
+        canPause = _true;
+    }
+
+    IEnumerator SlowMo()
+    {
+        float _slowTime = slowMoTime;
+        Image image = slowM.gameObject.GetComponent<Image>();
+        while (true)
+        {
+            if (_slowTime <= 0)
+            {
+                _slowTime = 0;
+                image.fillAmount = _slowTime;
+                break;
+            }
+            yield return null;
+            _slowTime -= Time.deltaTime;
+            image.fillAmount = _slowTime / slowMoTime;
+        }
+
+        AudioManager.Instance.PlayUnpause();
+        TimeManager.Instance.setWorldSpeed(2.0f);
+
+        while (true)
+        {
+            if (_slowTime >= slowMoTime)
+            {
+                _slowTime = slowMoTime;
+                image.fillAmount = _slowTime;
+                break;
+            }
+            yield return null;
+            _slowTime += Time.deltaTime;
+            image.fillAmount = _slowTime / slowMoTime;
+        }
+        canSlowMo = true;
+    }
+
+    IEnumerator FastF()
+    {
+        float _fastTime = fastFTime;
+        Image image = fastF.gameObject.GetComponent<Image>();
+        while (true)
+        {
+            if (_fastTime <= 0)
+            {
+                _fastTime = 0;
+                image.fillAmount = _fastTime;
+                break;
+            }
+            yield return null;
+            _fastTime -= Time.deltaTime;
+            image.fillAmount = _fastTime / fastFTime;
+        }
+
+        AudioManager.Instance.PlayUnpause();
+        player.speedmult = 1.0f;
+
+        while (true)
+        {
+            if (_fastTime >= fastFTime)
+            {
+                _fastTime = fastFTime;
+                image.fillAmount = _fastTime;
+                break;
+            }
+            yield return null;
+            _fastTime += Time.deltaTime;
+            image.fillAmount = _fastTime / fastFTime;
+        }
+        canFastForward = true;
+    }
+
 
 }
