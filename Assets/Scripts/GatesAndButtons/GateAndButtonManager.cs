@@ -6,7 +6,7 @@ public class GateAndButtonManager : MonoBehaviour
     public enum ButtonMode
     {
         Switch,
-        Momentary
+        Button
     }
 
     [System.Serializable]
@@ -96,7 +96,7 @@ public class GateAndButtonManager : MonoBehaviour
         {
             if (!specificButton.isPressed) return;
 
-            if (specificButton.interactMode == ButtonMode.Momentary)
+            if (specificButton.interactMode == ButtonMode.Button)
             {
                 specificButton.isPressed = false;
                 MoveItem(specificButton.mover, specificButton.initialPosition, buttonDuration);
