@@ -9,6 +9,8 @@ public class AnimationManager : MonoBehaviour
     [Header("Speed to start runninng anim")]
     [SerializeField] private float runThreshold = 6.0f;
 
+    private bool wasGrounded = false;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -30,16 +32,17 @@ public class AnimationManager : MonoBehaviour
         bool isRunning = currentSpeed > runThreshold;
 
         animator.SetBool("Walking", isMoving && !isRunning);
-        animator.SetBool("Running", isRunning);;
-        
-        if (controller.isGrounded && animator.GetBool("Falling"))
+        animator.SetBool("Running", isRunning);
+
+        if (controller.isGrounded && !wasGrounded)
         {
             animator.SetBool("JustFell", true);
-            animator.SetBool("Falling", false);
         }
 
         bool isFalling = !controller.isGrounded && player.velocity < -1f;
         animator.SetBool("Falling", isFalling);
+
+        wasGrounded = controller.isGrounded;
     }
 
     public void TriggerJumpAnimation()
