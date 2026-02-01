@@ -3,23 +3,38 @@ using UnityEngine;
 
 public class MoveToPosition : MonoBehaviour
 {
-    public void StartMoving(Vector3 offset, float duration)
+    private Vector3 currentTarget;
+    private Coroutine activeCoroutine;
+
+    public void StartMoving(Vector3 targetPosition, float duration)
     {
-        StartCoroutine(MoveTo(offset, duration));
+        if (activeCoroutine != null && targetPosition == currentTarget) return;
+
+        currentTarget = targetPosition;
+        
+        if (activeCoroutine != null) StopCoroutine(activeCoroutine);
+        activeCoroutine = StartCoroutine(MoveTo(targetPosition, duration));
     }
 
     IEnumerator MoveTo(Vector3 target, float duration)
     {
         Vector3 startPosition = transform.position;
-        target = new Vector3 (startPosition.x, target.y, startPosition.z);
+        Vector3 finalTarget = new Vector3(startPosition.x, target.y, startPosition.z);
         float elapsedTime = 0f;
 
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / duration;
-            transform.position = Vector3.Lerp(startPosition, target, t);
+            
+            // Use SmoothStep for cleaner movement
+            t = Mathf.SmoothStep(0, 1, t); 
+            
+            transform.position = Vector3.Lerp(startPosition, finalTarget, t);
             yield return null;
         }
+
+        transform.position = finalTarget;
+        activeCoroutine = null;
     }
 }

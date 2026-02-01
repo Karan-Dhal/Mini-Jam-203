@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class ManagerTriggerProxy : MonoBehaviour
 {
-    [Tooltip("Drag the main GateAndButtonManager here")]
     [SerializeField] private GateAndButtonManager gateAndButtonManager;
-
-    [Tooltip("Assign the specific Button GameObject that moves when this trigger is hit.")]
     [SerializeField] private GameObject linkedButtonObject;
 
     void Awake()
@@ -13,11 +10,6 @@ public class ManagerTriggerProxy : MonoBehaviour
         if(gateAndButtonManager == null)
         {
             gateAndButtonManager = GetComponentInParent<GateAndButtonManager>();
-            
-            if(gateAndButtonManager == null)
-            {
-                Debug.LogError("GateAndButtonManager not found. Please assign it in the Inspector.");
-            }
         }
 
         if (linkedButtonObject == null)
@@ -30,9 +22,24 @@ public class ManagerTriggerProxy : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            Debug.Log("Player entered button trigger");
+
             if (gateAndButtonManager != null && linkedButtonObject != null)
             {
                 gateAndButtonManager.NotifyButtonPressed(linkedButtonObject);
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Player exited button trigger");
+            
+            if (gateAndButtonManager != null && linkedButtonObject != null)
+            {
+                gateAndButtonManager.NotifyButtonReleased(linkedButtonObject);
             }
         }
     }
