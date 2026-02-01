@@ -10,6 +10,6 @@ public class HurtBox : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject = player.gameObject) { player.Damage(1); }
+        if (other.gameObject == player.gameObject) { player.Damage(1); }
     }
 }
