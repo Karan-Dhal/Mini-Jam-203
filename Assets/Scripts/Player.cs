@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float jump = 2f;
     [SerializeField] private float gravity = -9.8f;
     [SerializeField] private int health = 3;
+    private int _health;
     [SerializeField] private int hurtTime = 5;
     private bool hurt = false;
     private float cyoteTime = 0.25f;
@@ -30,11 +31,14 @@ public class Player : MonoBehaviour
     private bool DJumped = false;
     public Vector3 movingPlatform = Vector3.zero;
     private Vector3 airVelocity = Vector3.zero;
+    private bool dead = false;
+    private float deadTime = 5;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _health = health;
         controller = GetComponent<CharacterController>();
         action.FindActionMap("Player").Enable();
 
@@ -65,6 +69,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (dead) return;
         moveInput = moveInputAction.ReadValue<Vector2>();
 
         Vector3 moveDir = (Camera.main.transform.forward.normalized * moveInput.y) + (Camera.main.transform.right.normalized * moveInput.x);
@@ -118,8 +123,9 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             //Play Death
-
+            dead = true;
             gameObject.GetComponent<Checkpoint>().ReturnToCheckpoint();
+            StartCoroutine(Deady());
         }
         else
         {
@@ -133,6 +139,16 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(hurtTime);
         hurt = false;
+    }
+    IEnumerator Deady()
+    {
+        yield return new WaitForSeconds(deadTime);
+        dead = false;
+    }
+
+    public void ResetHealth()
+    {
+        health = _health;
     }
 
 }

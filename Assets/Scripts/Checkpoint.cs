@@ -12,6 +12,7 @@ public class Checkpoint : MonoBehaviour
         if (other.gameObject.tag == "Checkpoint")
         {
             checkpointPos = other.transform.position;
+            gameObject.GetComponent<Player>().ResetHealth();
         }
     }
 
