@@ -11,8 +11,8 @@ public class GateAndButtonManager : MonoBehaviour
     private MoveToPosition buttonMover;
 
 
-    [SerializeField] private float gateDuration = 1f;
-    [SerializeField] private float buttonDuration = 0.5f;
+    [SerializeField] private float gateDuration = 3f;
+    [SerializeField] private float buttonDuration = 1.5f;
 
     private void Awake()
     {
@@ -52,6 +52,6 @@ public class GateAndButtonManager : MonoBehaviour
         gateMover.StartMoving(gateOffset, gateDuration);
 
         Vector3 buttonOffset = new Vector3(buttonTopTransform.position.x, -buttonTopTransform.position.y, buttonTopTransform.position.z);
-        buttonMover.StartMoving(buttonTopTransform.position, buttonDuration);
+        buttonMover.StartMoving(buttonOffset, buttonDuration);
     }
 }
