@@ -4473,6 +4473,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4493620086093147072, guid: a6499cb3fc1ab44428fd117558b00fed, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6135968318710618009, guid: a6499cb3fc1ab44428fd117558b00fed, type: 3}
       propertyPath: scoreText
       value: 
