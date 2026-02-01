@@ -86,6 +86,7 @@ public class Player : MonoBehaviour
             cyoteTime -= Time.deltaTime;
             velocity += gravity;
             Jumped = false;
+            gameObject.transform.position = Vector3.zero;
         }
 
 
@@ -112,14 +113,17 @@ public class Player : MonoBehaviour
     public void Damage(int damage)
     {
         if (hurt) return;
-        hurt = true;
+        
         health -= damage;
         if (health <= 0)
         {
             //Play Death
+
+            gameObject.GetComponent<Checkpoint>().ReturnToCheckpoint();
         }
         else
         {
+            hurt = true;
             //updateUi health
             StartCoroutine(Hurty());
         }

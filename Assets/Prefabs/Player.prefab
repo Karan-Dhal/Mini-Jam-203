@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 2726008780469094977}
   - component: {fileID: 7309707370396180606}
   - component: {fileID: 8648060335010545293}
+  - component: {fileID: 1849175817146427983}
+  - component: {fileID: 6321025862441783085}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -160,8 +162,13 @@ MonoBehaviour:
   speed: 5
   jump: 10
   gravity: -0.25
+  health: 3
+  hurtTime: 5
+  airControl: 1
+  airDempen: 1
   speedmult: 1
   velocity: 0
+  movingPlatform: {x: 0, y: 0, z: 0}
 --- !u!114 &7309707370396180606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +201,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe631c042b691394c8822384d8508496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &1849175817146427983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331354798041059170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11d43e75e36c7d46a3dfc4e09bbcf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
+--- !u!114 &6321025862441783085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331354798041059170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 786656b4d38cdd8478fbe1f890f17b39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KillY
+  killZ: -10
 --- !u!1 &5119570404860805543
 GameObject:
   m_ObjectHideFlags: 0
