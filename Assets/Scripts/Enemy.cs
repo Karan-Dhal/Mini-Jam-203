@@ -24,12 +24,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _attackRangeMin = 0;
     [SerializeField] private float _chaseSpeed = 5;
     [SerializeField] private float _wanderSpeed = 1;
+    private bool _attacking = false;
 
-    private void FixedUpdate()
-    {
-        print(_navMeshAgent.destination);
-        //print((_attackRangeMin + (_attackRangeMax - _attackRangeMin) / 2));
-    }
     private void Awake()
     {
         this.player = GameObject.FindWithTag("Player").transform;
@@ -58,6 +54,9 @@ public class Enemy : MonoBehaviour
 
         while (true)
         {
+
+            yield return null;
+            if (_attacking) continue;
             float curTime = Time.time;
             //print(_nextIdleActionTime - Time.time + " || " + destination);
             if (_nextIdleActionTime < curTime)
@@ -90,7 +89,6 @@ public class Enemy : MonoBehaviour
                 ChangeState(Chase());
             }
 
-            yield return null;
         }
     }
 
@@ -128,6 +126,8 @@ public class Enemy : MonoBehaviour
     {
         while (true)
         {
+            yield return null;
+            if (_attacking) continue;
             var lookPos = (player.transform.position - gameObject.transform.position);
             lookPos.y = 0;
             var rotation = Quaternion.LookRotation(lookPos);
@@ -141,14 +141,15 @@ public class Enemy : MonoBehaviour
                 }
                 else 
                 {
-                    
+                    _navMeshAgent.ResetPath();
+                    _attacking = true;
                     print("Attack");
-                    //Attack
+                    //Attack Animation, event in attack animation that triggers the attack, call EndAttack() at end
                 }
             }
             else ChangeState(Chase());
 
-            yield return null;
+            
         }
     }
 
@@ -176,5 +177,9 @@ public class Enemy : MonoBehaviour
             _navMeshAgent.SetDestination(_Pdestination);
         }
         ChangeState(_currentState);
+    }
+    public void EndAttack()
+    {
+        _attacking = false;
     }
 }

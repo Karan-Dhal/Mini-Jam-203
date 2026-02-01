@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,7 +10,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jump = 2f;
     [SerializeField] private float gravity = -9.8f;
+    [SerializeField] private int health = 3;
+    [SerializeField] private int hurtTime = 5;
+    private bool hurt = false;
     private float cyoteTime = 0.25f;
+    [SerializeField, Range(0.00f,1.00f)] private float airControl = 1f;
+    [SerializeField, Range(0.00f, 1.00f)] private float airDempen = 1f;
 
     public float speedmult = 1f;
 
@@ -23,6 +29,7 @@ public class Player : MonoBehaviour
     private bool Jumped = false;
     private bool DJumped = false;
     public Vector3 movingPlatform = Vector3.zero;
+    private Vector3 airVelocity = Vector3.zero;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,6 +52,8 @@ public class Player : MonoBehaviour
             velocity = jump;
             print("JUMPED");
             Jumped = true;
+
+            airVelocity = controller.velocity;
         }
         else if (DJumped)
         {
@@ -79,13 +88,47 @@ public class Player : MonoBehaviour
             Jumped = false;
         }
 
-        moveDir.y = velocity;
-        moveDir += movingPlatform;
+        
 
-        controller.Move(moveDir * Time.deltaTime);
+        if (controller.isGrounded)
+        {
+            moveDir = Vector3.ClampMagnitude(moveDir, speed * speedmult);
+            moveDir.y = velocity;
+            moveDir += movingPlatform;
+            controller.Move(moveDir * Time.deltaTime);
+
+        }
+        else
+        {
+            airVelocity = new Vector3(airVelocity.x, 0, airVelocity.z) * airDempen + moveDir * airControl;
+            airVelocity = Vector3.ClampMagnitude(airVelocity, speed * speedmult);
+            airVelocity.y = velocity;
+            controller.Move(airVelocity * Time.deltaTime);
+        }
 
         movingPlatform = Vector3.zero;
     }
 
+    public void Damage(int damage)
+    {
+        if (hurt) return;
+        hurt = true;
+        health -= damage;
+        if (health <= 0)
+        {
+            //Play Death
+        }
+        else
+        {
+            //updateUi health
+            StartCoroutine(Hurty());
+        }
+    }
+
+    IEnumerator Hurty()
+    {
+        yield return new WaitForSeconds(hurtTime);
+        hurt = false;
+    }
 
 }
