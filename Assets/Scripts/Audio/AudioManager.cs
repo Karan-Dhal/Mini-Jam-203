@@ -15,7 +15,8 @@ public class AudioManager : MonoBehaviour
 
     [Header("Music Tracks")]
     public AudioClip menuMusic;
-    public AudioClip gameplayMusic;
+    public AudioClip gameplayMusicStart;
+    public AudioClip gameplayMusicToLoop;
     public AudioClip deathMusic;
 
     [Header("UI & Time Sounds")]
@@ -56,7 +57,9 @@ public class AudioManager : MonoBehaviour
     }
 
     public void PlayMenuMusic() => PlayMusic(menuMusic);
-    public void PlayGameplayMusic() => PlayMusic(gameplayMusic);
+    public void PlayGameplayMusicStart() => uiTimeSource.PlayOneShot(gameplayMusicStart);
+    public void PlayGameplayMusicLoop() => PlayMusic(gameplayMusicToLoop);
+    public void PlayGameplayMusic() => StartCoroutine(PlayGamePlayMusicInOrder());
     public void PlayDeathMusic() => PlayMusic(deathMusic);
 
     public void PlayPause() => uiTimeSource.PlayOneShot(pauseSFX);
@@ -116,5 +119,12 @@ public class AudioManager : MonoBehaviour
                 yield return null; 
             }
         }
+    }
+
+    private IEnumerator PlayGamePlayMusicInOrder()
+    {
+        PlayGameplayMusicStart();
+        yield return new WaitForSeconds(gameplayMusicStart.length);
+        PlayGameplayMusicLoop();
     }
 }
