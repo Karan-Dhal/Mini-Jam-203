@@ -25,7 +25,7 @@ public class MovingPlatform : MonoBehaviour
         previousPosition = transform.position;
 
         transform.position = Vector3.Lerp(transform.position, a.position, speed * Time.deltaTime);
-        print(Vector3.Distance(transform.position, a.position));
+        //print(Vector3.Distance(transform.position, a.position));
         if (!done && Vector3.Distance(transform.position, a.position) < 0.1)
         {
             done = true;
