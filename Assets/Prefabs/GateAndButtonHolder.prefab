@@ -77,10 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1311b772a4dcf18b042741a88c4f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GateAndButtonManager
-  gate: {fileID: 6658066302673685771}
-  gateTopTransform: {fileID: 2596498928870870575}
-  button: {fileID: 8403457150216548927}
-  buttonTopTransform: {fileID: 4148616193650719616}
+  buttons: []
+  gates: []
   gateDuration: 3
   buttonDuration: 1.5
 --- !u!1 &6658066302673685771
@@ -96,6 +94,7 @@ GameObject:
   - component: {fileID: 6331727146505292947}
   - component: {fileID: 7213307017001474348}
   - component: {fileID: 416953916913403038}
+  - component: {fileID: 5853357632539087148}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -209,6 +208,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2707af04263069e95b2dcb811063d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveToPosition
+  paused: 0
+--- !u!114 &5853357632539087148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6658066302673685771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0684bac779456ca48a81810436e79a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMechanic
+  Walls: {fileID: 0}
+  move: {fileID: 416953916913403038}
 --- !u!1 &7780120088535208021
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,6 +269,7 @@ GameObject:
   - component: {fileID: 8231934236425563220}
   - component: {fileID: 6103732257083308681}
   - component: {fileID: 328063820047024007}
+  - component: {fileID: 825376430832803191}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -396,6 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ManagerTriggerProxy
   gateAndButtonManager: {fileID: 1765173088502772607}
+  linkedButtonObject: {fileID: 0}
 --- !u!114 &328063820047024007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,3 +424,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2707af04263069e95b2dcb811063d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveToPosition
+  paused: 0
+--- !u!114 &825376430832803191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8403457150216548927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0684bac779456ca48a81810436e79a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMechanic
+  Walls: {fileID: 0}
+  move: {fileID: 328063820047024007}

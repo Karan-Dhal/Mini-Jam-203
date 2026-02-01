@@ -5,6 +5,7 @@ public class MoveToPosition : MonoBehaviour
 {
     private Vector3 currentTarget;
     private Coroutine activeCoroutine;
+    public bool paused = false;
 
     public void StartMoving(Vector3 targetPosition, float duration)
     {
@@ -24,7 +25,8 @@ public class MoveToPosition : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            elapsedTime += Time.deltaTime;
+            if (!paused) 
+                elapsedTime += Time.deltaTime;
             float t = elapsedTime / duration;
             
             // Use SmoothStep for cleaner movement

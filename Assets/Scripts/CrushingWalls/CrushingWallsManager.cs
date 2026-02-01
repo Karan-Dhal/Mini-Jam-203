@@ -15,13 +15,14 @@ public class CrushingWallsManager : MonoBehaviour
     private Vector3 initialScaleRight;
     private bool isCrushed = false;
     [HideInInspector] public bool iscrushing = false;
+    public bool paused = false;
 
     void Start()
     {
         initialScaleLeft = wallLeft.transform.localScale;
         initialScaleRight = wallRight.transform.localScale;
-        
-        StartCoroutine(CrushWalls());
+
+        StartCoroutine(CrushSequence());
     }
 
     IEnumerator CrushWalls()
@@ -35,23 +36,35 @@ public class CrushingWallsManager : MonoBehaviour
 
     IEnumerator CrushSequence()
     {
-        if (!isCrushed)
+        while (true)
         {
-            AudioManager.Instance.PlayCrushingWalls();
+            float elapsedTime = 0f;
+            while (elapsedTime < crushInterval)
+            {
+                if (!paused)
+                    elapsedTime += Time.deltaTime;
+                yield return null;
+            }
 
-            iscrushing = true;
-            yield return MoveWalls(amountToCrush, -amountToCrush, true);
-            iscrushing = false;
+            if (!isCrushed)
+            {
+                AudioManager.Instance.PlayCrushingWalls();
 
-            isCrushed = true;
-        }
-        else
-        {
-            AudioManager.Instance.PlayCrushingWalls();
+                iscrushing = true;
+                yield return StartCoroutine(MoveWalls(amountToCrush, -amountToCrush, true));
+                iscrushing = false;
+
+                isCrushed = true;
+            }
+            else
+            {
+                AudioManager.Instance.PlayCrushingWalls();
             
-            yield return MoveWalls(-amountToCrush, amountToCrush, false);
+                yield return StartCoroutine(MoveWalls(-amountToCrush, amountToCrush, false));
 
-            isCrushed = false;
+                isCrushed = false;
+            }
+            yield return null;
         }
     }
 
@@ -71,7 +84,8 @@ public class CrushingWallsManager : MonoBehaviour
         float elapsedTime = 0f;
         while (elapsedTime < crushDuration)
         {
-            elapsedTime += Time.deltaTime;
+            if (!paused)
+                elapsedTime += Time.deltaTime;
             float t = Mathf.SmoothStep(0, 1, elapsedTime / crushDuration);
 
             wallLeft.transform.position = Vector3.Lerp(leftPosStart, leftPosTarget, t);
@@ -87,6 +101,8 @@ public class CrushingWallsManager : MonoBehaviour
         wallRight.transform.position = rightPosTarget;
         wallLeft.transform.localScale = leftScaleTarget;
         wallRight.transform.localScale = rightScaleTarget;
+
+        isCrushed = !isCrushed;
     }
 
     Vector3 GetTargetScale(Vector3 baseScale, float addedAmount)

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7992624476842677693}
   - component: {fileID: 1147085762801411952}
+  - component: {fileID: 290332718597150517}
   m_Layer: 0
   m_Name: CrushingWalls
   m_TagString: Untagged
@@ -53,6 +54,21 @@ MonoBehaviour:
   amountToCrush: 2
   expandInXDirection: 0
   iscrushing: 0
+  paused: 0
+--- !u!114 &290332718597150517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21481301331166002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0684bac779456ca48a81810436e79a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMechanic
+  Walls: {fileID: 1147085762801411952}
+  move: {fileID: 0}
 --- !u!1 &4474484479644207717
 GameObject:
   m_ObjectHideFlags: 0

@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 6880435077557078509}
   - component: {fileID: 6342788845891953631}
   - component: {fileID: 3659237068245679404}
+  - component: {fileID: 2754752197248292577}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -219,6 +220,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2707af04263069e95b2dcb811063d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveToPosition
+  paused: 0
+--- !u!114 &2754752197248292577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071035938321249216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0684bac779456ca48a81810436e79a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMechanic
+  Walls: {fileID: 0}
+  move: {fileID: 3659237068245679404}
 --- !u!1 &4021015178785336952
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,6 +280,7 @@ GameObject:
   - component: {fileID: 7321031136746653928}
   - component: {fileID: 6109617644441853025}
   - component: {fileID: 820313276098790296}
+  - component: {fileID: 6206646751240873024}
   m_Layer: 0
   m_Name: Button (1)
   m_TagString: Untagged
@@ -391,6 +408,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2707af04263069e95b2dcb811063d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveToPosition
+  paused: 0
+--- !u!114 &6206646751240873024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4501604220602521449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0684bac779456ca48a81810436e79a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMechanic
+  Walls: {fileID: 0}
+  move: {fileID: 820313276098790296}
 --- !u!1 &5050550179440916997
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,6 +436,7 @@ GameObject:
   - component: {fileID: 5665268796303734297}
   - component: {fileID: 6552717166054440800}
   - component: {fileID: 4787821937308437958}
+  - component: {fileID: 3046120079623449898}
   m_Layer: 0
   m_Name: Gate (1)
   m_TagString: Untagged
@@ -517,6 +550,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2707af04263069e95b2dcb811063d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveToPosition
+  paused: 0
+--- !u!114 &3046120079623449898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5050550179440916997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0684bac779456ca48a81810436e79a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMechanic
+  Walls: {fileID: 0}
+  move: {fileID: 4787821937308437958}
 --- !u!1 &5068153074354515664
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,6 +579,7 @@ GameObject:
   - component: {fileID: 7175278689946599490}
   - component: {fileID: 5897204076099689014}
   - component: {fileID: 3830965234676823266}
+  - component: {fileID: 8296313566470575681}
   m_Layer: 0
   m_Name: Button (2)
   m_TagString: Untagged
@@ -658,6 +707,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2707af04263069e95b2dcb811063d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveToPosition
+  paused: 0
+--- !u!114 &8296313566470575681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5068153074354515664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0684bac779456ca48a81810436e79a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMechanic
+  Walls: {fileID: 0}
+  move: {fileID: 3830965234676823266}
 --- !u!1 &7937158940370599714
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,6 +815,7 @@ GameObject:
   - component: {fileID: 5624521784672038724}
   - component: {fileID: 8693685155750032660}
   - component: {fileID: 3829718491947521474}
+  - component: {fileID: 7050101128429996485}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -878,6 +943,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2707af04263069e95b2dcb811063d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveToPosition
+  paused: 0
+--- !u!114 &7050101128429996485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8013222997688083981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0684bac779456ca48a81810436e79a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMechanic
+  Walls: {fileID: 0}
+  move: {fileID: 3829718491947521474}
 --- !u!1 &8660897462086691907
 GameObject:
   m_ObjectHideFlags: 0
