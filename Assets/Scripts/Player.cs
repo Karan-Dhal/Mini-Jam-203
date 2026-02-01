@@ -34,8 +34,12 @@ public class Player : MonoBehaviour
     private bool dead = false;
     private float deadTime = 5;
 
+    private AnimationManager animManager;
+
     void Start()
     {
+        animManager = GetComponentInChildren<AnimationManager>();
+
         AudioManager.Instance.PlayGameplayMusic();
 
         _health = health;
@@ -56,6 +60,7 @@ public class Player : MonoBehaviour
 
             airVelocity = controller.velocity;
 
+            animManager.TriggerJumpAnimation();
             AudioManager.Instance.PlayJump();
         }
         else if (DJumped)
