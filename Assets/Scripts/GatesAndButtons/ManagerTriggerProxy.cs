@@ -22,8 +22,6 @@ public class ManagerTriggerProxy : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            Debug.Log("Player entered button trigger");
-
             if (gateAndButtonManager != null && linkedButtonObject != null)
             {
                 gateAndButtonManager.NotifyButtonPressed(linkedButtonObject);
@@ -35,8 +33,6 @@ public class ManagerTriggerProxy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player exited button trigger");
-            
             if (gateAndButtonManager != null && linkedButtonObject != null)
             {
                 gateAndButtonManager.NotifyButtonReleased(linkedButtonObject);
