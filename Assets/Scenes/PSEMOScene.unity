@@ -685,10 +685,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1311b772a4dcf18b042741a88c4f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GateAndButtonManager
-  gate: {fileID: 1760836705}
-  gateTopTransform: {fileID: 179305628}
-  button: {fileID: 617499151}
-  buttonTopTransform: {fileID: 43374447}
+  buttons:
+  - buttonObject: {fileID: 617499151}
+    targetTransform: {fileID: 43374447}
+    mover: {fileID: 0}
+    isPressed: 0
+  gates:
+  - gateObject: {fileID: 1760836705}
+    targetTransform: {fileID: 179305628}
+    mover: {fileID: 0}
   gateDuration: 3
   buttonDuration: 1.5
 --- !u!1 &410087039
@@ -991,6 +996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ManagerTriggerProxy
   gateAndButtonManager: {fileID: 406802633}
+  linkedButtonObject: {fileID: 0}
 --- !u!1 &636558893
 GameObject:
   m_ObjectHideFlags: 0

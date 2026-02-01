@@ -2,20 +2,27 @@ using UnityEngine;
 
 public class ManagerTriggerProxy : MonoBehaviour
 {
-    [SerializeField] GateAndButtonManager gateAndButtonManager;
+    [Tooltip("Drag the main GateAndButtonManager here")]
+    [SerializeField] private GateAndButtonManager gateAndButtonManager;
+
+    [Tooltip("Assign the specific Button GameObject that moves when this trigger is hit.")]
+    [SerializeField] private GameObject linkedButtonObject;
 
     void Awake()
     {
         if(gateAndButtonManager == null)
         {
-            if(transform.parent.TryGetComponent(out GateAndButtonManager t))
+            gateAndButtonManager = GetComponentInParent<GateAndButtonManager>();
+            
+            if(gateAndButtonManager == null)
             {
-                gateAndButtonManager = t;
+                Debug.LogError("GateAndButtonManager not found. Please assign it in the Inspector.");
             }
-            else
-            {
-                Debug.LogError("GateAndButtonManager is not assigned in ManagerTriggerProxy AND COULDNT BE FOUND IN PARENT.");
-            }
+        }
+
+        if (linkedButtonObject == null)
+        {
+            linkedButtonObject = transform.parent.gameObject;
         }
     }
 
@@ -23,7 +30,10 @@ public class ManagerTriggerProxy : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            gateAndButtonManager.ActivateGateAndButton();
+            if (gateAndButtonManager != null && linkedButtonObject != null)
+            {
+                gateAndButtonManager.NotifyButtonPressed(linkedButtonObject);
+            }
         }
     }
 }
