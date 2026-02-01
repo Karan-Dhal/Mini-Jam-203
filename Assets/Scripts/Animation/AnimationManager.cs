@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AnimationManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class AnimationManager : MonoBehaviour
 
     private bool wasGrounded = false;
 
+    private bool bugHappenedForAFrame = false;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -18,7 +21,7 @@ public class AnimationManager : MonoBehaviour
         player = GetComponentInParent<Player>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         UpdateMovementStates();
     }
@@ -37,12 +40,40 @@ public class AnimationManager : MonoBehaviour
         if (controller.isGrounded && !wasGrounded)
         {
             animator.SetBool("JustFell", true);
+
+            //GARBAGE BUGFIX
+            StartCoroutine(disableJustFell());
         }
 
         bool isFalling = !controller.isGrounded && player.velocity < -1f;
         animator.SetBool("Falling", isFalling);
 
         wasGrounded = controller.isGrounded;
+
+        //GARBAGE BUGFIX 
+        if(animator.GetBool("JustFell") && animator.GetBool("JustJumped"))
+        {
+            if(bugHappenedForAFrame)
+            {
+                animator.SetBool("JustFell", false);
+                animator.SetBool("JustJumped", false);
+            }
+            else
+            {
+                bugHappenedForAFrame = true;
+            }
+        }
+        else
+        {
+            bugHappenedForAFrame = false;
+        }
+    }
+
+    //GARBAGE BUGFIX
+    IEnumerator disableJustFell()
+    {
+        yield return new WaitForSecondsRealtime(0.6f);
+        animator.SetBool("JustFell", false);
     }
 
     public void TriggerJumpAnimation()

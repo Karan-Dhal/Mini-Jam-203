@@ -110,7 +110,6 @@ public class Player : MonoBehaviour
             cyoteTime -= Time.deltaTime;
             velocity += gravity;
             Jumped = false;
-            gameObject.transform.position = Vector3.zero;
         }
 
 
