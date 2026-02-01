@@ -150,7 +150,9 @@ public class Player : MonoBehaviour
     }
     IEnumerator Deady()
     {
+        AudioManager.Instance.PlayDeathMusic();
         yield return new WaitForSeconds(deadTime);
+        AudioManager.Instance.PlayGameplayMusic();
         dead = false;
     }
 
@@ -158,5 +160,4 @@ public class Player : MonoBehaviour
     {
         health = _health;
     }
-
 }
