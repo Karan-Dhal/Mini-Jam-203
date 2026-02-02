@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -12,8 +13,8 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] List<GameObject> PauseOpen;
     [SerializeField] AudioMixer mixer;
-    [SerializeField] GameObject _music;
-    [SerializeField] GameObject _sounds;
+    [SerializeField] Image _musicDisabled;
+    [SerializeField] Image _soundsDisabled;
 
 
     public void Start()
@@ -60,22 +61,23 @@ public class PauseMenu : MonoBehaviour
     public void SetCursorLocked()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     public void SetCursorUnLocked()
     {
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
-    public void SetMusic(bool _true)
+    public void SetMusic(float num)
     {
-        _music.SetActive(!_true);
-        if (_true) mixer.SetFloat("MyExposedParam", 0);
-        else mixer.SetFloat("MyExposedParam", -80);
+        _musicDisabled.fillAmount = (num - -80) / (0 - -80);
+        mixer.SetFloat("MyExposedParam", num);
     }
-    public void SetSound(bool _true)
+    public void SetSound(float num)
     {
-        _sounds.SetActive(!_true);
-        if (_true) mixer.SetFloat("MyExposedParam 1", 0);
-        else mixer.SetFloat("MyExposedParam 1", -80);
+        _soundsDisabled.fillAmount = (num - -80) / (0 - -80);
+        mixer.SetFloat("MyExposedParam 1", num);
+
 
     }
 }
