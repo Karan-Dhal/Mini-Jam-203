@@ -127,4 +127,18 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSeconds(gameplayMusicStart.length);
         PlayGameplayMusicLoop();
     }
+
+    public void SetMusicVolume(float volume)
+    {
+        musicSource.volume = volume;
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        uiTimeSource.volume = volume;
+        rewardSource.volume = volume;
+        environmentalSource.volume = volume;
+        actionSource.volume = volume;
+        footstepSource.volume = volume;
+    }
 }
