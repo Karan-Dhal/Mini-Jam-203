@@ -8,12 +8,16 @@ public class BreakingPlatform : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision detected on BreakingPlatform");
-
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player collided with BreakingPlatform, initiating break sequence");
+            Invoke(nameof(BreakPlatform), breakDelay);
+        }
+    }
 
+    public void TriggerOnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
             Invoke(nameof(BreakPlatform), breakDelay);
         }
     }
