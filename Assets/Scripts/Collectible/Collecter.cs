@@ -16,6 +16,6 @@ public class Collecter : MonoBehaviour
 
     void UpdateUI()
     {
-        scoreText.text = "[}}-<" + Score + ">-{]";
+        scoreText.text = Score.ToString();
     }
 }

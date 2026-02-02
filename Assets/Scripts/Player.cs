@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     private bool DJumped = false;
     public Vector3 movingPlatform = Vector3.zero;
     private Vector3 airVelocity = Vector3.zero;
-    private bool dead = false;
+    public bool dead = false;
     private float deadTime = 5;
 
     private AnimationManager animManager;

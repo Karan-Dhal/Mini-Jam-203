@@ -67,6 +67,16 @@ public class AnimationManager : MonoBehaviour
         {
             bugHappenedForAFrame = false;
         }
+
+        if(player.dead)
+        {
+            animator.SetBool("JustFell", false);
+            animator.SetBool("JustJumped", false);
+            animator.SetBool("Falling", false);
+            animator.SetBool("Walking", false);
+            animator.SetBool("Running", false);
+            animator.SetBool("Punching", false);
+        }
     }
 
     //GARBAGE BUGFIX
