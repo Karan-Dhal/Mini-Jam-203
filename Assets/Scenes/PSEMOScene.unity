@@ -280,6 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2707af04263069e95b2dcb811063d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveToPosition
+  paused: 0
 --- !u!114 &22830697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,6 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2707af04263069e95b2dcb811063d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveToPosition
+  paused: 0
 --- !u!65 &206629071
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -972,6 +974,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0684bac779456ca48a81810436e79a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMechanic
+  Walls: {fileID: 0}
+  move: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,6 +1199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2707af04263069e95b2dcb811063d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveToPosition
+  paused: 0
 --- !u!114 &513446999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2065,6 +2070,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0684bac779456ca48a81810436e79a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMechanic
+  Walls: {fileID: 0}
+  move: {fileID: 0}
 --- !u!114 &1019837627 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7516109755171599227, guid: 34392054346a02c4b8cf68e47c367b30, type: 3}
@@ -2378,6 +2385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2707af04263069e95b2dcb811063d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveToPosition
+  paused: 0
 --- !u!114 &1336923932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2597,6 +2605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2707af04263069e95b2dcb811063d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveToPosition
+  paused: 0
 --- !u!65 &1508683701
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2723,6 +2732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2707af04263069e95b2dcb811063d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveToPosition
+  paused: 0
 --- !u!65 &1672671977
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2870,6 +2880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2707af04263069e95b2dcb811063d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveToPosition
+  paused: 0
 --- !u!114 &1874969696
 MonoBehaviour:
   m_ObjectHideFlags: 0
