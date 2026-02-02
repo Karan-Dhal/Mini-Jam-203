@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7359809361363557397}
   - component: {fileID: 734366562631771546}
   - component: {fileID: 582282859994350030}
+  - component: {fileID: 8481909362446784434}
   m_Layer: 0
   m_Name: Checkpoint
   m_TagString: Checkpoint
@@ -110,5 +111,32 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 5, z: 1}
+  m_Size: {x: 100, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
+--- !u!114 &8481909362446784434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8331429068691457004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395fbad319e319846889e22dbaafcbcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnityEventOnTrigger
+  Event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerMechanics, Assembly-CSharp
+        m_MethodName: CanFastF
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
