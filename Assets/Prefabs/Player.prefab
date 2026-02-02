@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1879910045628234492}
   - component: {fileID: 2726008780469094977}
   - component: {fileID: 7309707370396180606}
-  - component: {fileID: 8648060335010545293}
   - component: {fileID: 1849175817146427983}
   - component: {fileID: 6321025862441783085}
   - component: {fileID: 6135968318710618009}
@@ -157,22 +156,12 @@ MonoBehaviour:
   fastForwardSpeed: 2
   slowMoSpeed: 1
   pauseTime: 5
+  fastFTime: 5
+  slowMoTime: 5
   fastF: {fileID: 0}
   slowM: {fileID: 0}
   pause: {fileID: 0}
   channel: {fileID: 0}
---- !u!114 &8648060335010545293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1331354798041059170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe631c042b691394c8822384d8508496, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!114 &1849175817146427983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11d43e75e36c7d46a3dfc4e09bbcf37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
+  checkpointPos: {x: 0, y: 0, z: 0}
 --- !u!114 &6321025862441783085
 MonoBehaviour:
   m_ObjectHideFlags: 0
