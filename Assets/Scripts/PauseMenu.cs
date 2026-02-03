@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
@@ -16,9 +17,11 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] Image _musicDisabled;
     [SerializeField] Image _soundsDisabled;
 
+    public CinemachineInputAxisController camSence;
 
     public void Start()
     {
+        camSence = FindFirstObjectByType<CinemachineInputAxisController>();
         action.FindActionMap("Player").Enable();
         PauseInputAction = InputSystem.actions.FindAction("Pause");
         PauseInputAction.performed += OpenPauseMenu;
@@ -79,5 +82,19 @@ public class PauseMenu : MonoBehaviour
         mixer.SetFloat("MyExposedParam 1", num);
 
 
+    }
+    public void SetSensitivity(float num)
+    {
+        foreach (var c in camSence.Controllers)
+        {
+            if (c.Name == "Look Orbit X")
+            {
+                c.Input.Gain = num; // Example: Set gain to 2
+            }
+            if (c.Name == "Look Orbit Y")
+            {
+                c.Input.Gain = -num; // Example: Set gain to 2
+            }
+        }
     }
 }

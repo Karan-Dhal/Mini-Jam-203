@@ -7,7 +7,8 @@ public class MovePlayerWithPlatform : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Player>().movingPlatform = MP.GetVelocity();
+            //collision.gameObject.GetComponent<Player>().movingPlatform = MP.GetVelocity();
+            collision.gameObject.transform.parent = gameObject.transform;
         }
     }
     private void OnTriggerExit(Collider collision)

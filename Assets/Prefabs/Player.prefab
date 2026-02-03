@@ -139,6 +139,7 @@ MonoBehaviour:
   speedmult: 1
   velocity: 0
   movingPlatform: {x: 0, y: 0, z: 0}
+  dead: 0
   rotationSpeed: 10
 --- !u!114 &7309707370396180606
 MonoBehaviour:
@@ -174,7 +175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11d43e75e36c7d46a3dfc4e09bbcf37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
-  checkpointPos: {x: 0, y: 0, z: 0}
 --- !u!114 &6321025862441783085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +284,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Visual
       objectReference: {fileID: 0}
+    - target: {fileID: 7648223532337667709, guid: 9b473c233befeeec78364db9a7a657c4, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d4f23316e81b144391fcaf3e2c16b2a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
